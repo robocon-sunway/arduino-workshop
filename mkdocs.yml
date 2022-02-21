@@ -12,6 +12,8 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+  - attr_list
+  - md_in_html
 site_dir: docs
 docs_dir: src
 extra_css:
