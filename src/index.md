@@ -23,6 +23,12 @@
         </section>
         <section data-markdown>
           <textarea data-template>
+            ## Health & Safety
+            Fire extinguishers &middot; First aid kits &middot; Exits &middot; Staircase &middot; Water &middot; Shoes
+          </textarea>
+        </section>
+        <section data-markdown>
+          <textarea data-template>
             ## Introduction
             We will be using the little turtle robot from keyestudio with Arduino programming<br>
             <img alt="keyestudio robot" src="https://wiki.keyestudio.com/images/2/25/%E5%9B%BE%E7%89%871_-_ks0364.png" style="height:300px">
@@ -30,6 +36,9 @@
         </section>
       </div>
     </div>
+    !!! info inline end ""
+        <kbd>F</kbd> for fullscreen &middot;
+        <kbd>O</kbd> for overview
 
 ## Schedule
 
