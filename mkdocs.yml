@@ -34,6 +34,7 @@ extra:
 copyright: Prepared by <a href="https://ricwtk.github.io/" target="_blank">Richard Wong</a> for <a href="https://university.sunway.edu.my/set" taget="_blank">Sunway University, School of Engineering and Technology</a>
 nav:
   - index.md
+  - Basics: "basics.md"
   - Tutorial 1: "tutorial1.md"
   - Tutorial 2: "tutorial2.md"
   - Tutorial 3: "tutorial3.md"
