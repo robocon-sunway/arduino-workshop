@@ -8,12 +8,16 @@ theme:
     - toc.follow
     - toc.integrate
     - navigation.expand
+    - content.code.annotate
 markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
   - attr_list
   - md_in_html
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
 site_dir: docs
 docs_dir: src
 extra_css:
@@ -37,11 +41,11 @@ copyright: Prepared by <a href="https://ricwtk.github.io/" target="_blank">Richa
 nav:
   - index.md
   - Basics: "basics.md"
-  - Tutorial 1: "tutorial1.md"
-  - Tutorial 2: "tutorial2.md"
-  - Tutorial 3: "tutorial3.md"
-  - Tutorial 4: "tutorial4.md"
-  - Tutorial 5: "tutorial5.md"
+  - Tutorial 1 LED: "tutorial1.md"
+  - Tutorial 2 Motor: "tutorial2.md"
+  - Tutorial 3 Ultrasonic sensor: "tutorial3.md"
+  - Tutorial 4 Infrared sensors: "tutorial4.md"
+  - Tutorial 5 LED matrix: "tutorial5.md"
   - Challenge 1: "challenge1.md"
   - Challenge 2: "challenge2.md"
   - Challenge 3: "challenge3.md"
