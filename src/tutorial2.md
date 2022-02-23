@@ -1,6 +1,6 @@
 # Moving the robot
 
-???+ abstract "Slides"
+??? abstract "Slides"
     <div class="reveal deck1">
       <div class="slides">
         <section data-markdown>

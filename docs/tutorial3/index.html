@@ -253,16 +253,78 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-does-ultrasonic-sensor-work" class="md-nav__link">
-    What does ultrasonic sensor work?
+  <a href="#how-does-ultrasonic-sensor-work" class="md-nav__link">
+    How does ultrasonic sensor work?
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#reading-from-an-ultrasonic-sensor" class="md-nav__link">
-    Reading from an ultrasonic sensor
+  <a href="#read-from-an-ultrasonic-sensor" class="md-nav__link">
+    Read from an ultrasonic sensor
   </a>
+  
+    <nav class="md-nav" aria-label="Read from an ultrasonic sensor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pin-mode-definition" class="md-nav__link">
+    Pin mode definition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distance-calculation" class="md-nav__link">
+    Distance calculation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formula-derivation" class="md-nav__link">
+    Formula derivation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#code-implementation" class="md-nav__link">
+    Code implementation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serial-monitor-to-display-calculated-distance" class="md-nav__link">
+    Serial monitor to display calculated distance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combining-the-code" class="md-nav__link">
+    Combining the code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-and-upload-the-code-to-the-robot" class="md-nav__link">
+    Verify and upload the code to the robot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launch-serial-monitor" class="md-nav__link">
+    Launch serial monitor
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -364,9 +426,531 @@
 
 
 <h1 id="ultrasonic-sensor">Ultrasonic sensor</h1>
+<details class="abstract">
+<summary>Slides</summary>
+<p><div class="reveal deck1">
+  <div class="slides">
+    <section data-markdown>
+      <textarea data-template>
+        # Ultrasonic sensor
+        <img alt="ultrasonic sensor" src="https://wiki.keyestudio.com/images/a/aa/KS0313_3-2-2.png" style="height:200px" />
+        ---
+        ## Principle of ultrasonic sensor (echo)
+        <img alt="ultrasonic principle" src="https://wiki.keyestudio.com/images/4/4c/KS0313_3-2-1.png" style="height:300px" />
+        ---
+        ## Connection of ultrasonic sensor to the board
+        <img alt="ultrasonic connection" src="https://wiki.keyestudio.com/images/0/0e/Ks0364_-_connection_7.png" style="height:300px" />
+        ---
+        <img alt="ultrasonic principle" src="https://wiki.keyestudio.com/images/4/4c/KS0313_3-2-1.png" style="height:300px" />
+        <div style="display:flex;flex-direction:row">
+          <div style="flex-grow:1">
+            <table>
+              <tr>
+                <th style="text-align: left;">Purpose</th>
+                <th style="text-align: center;">Mode</th>
+                <th style="text-align: center;">Pin on board</th>
+              </tr>
+              <tr>
+                <td style="text-align: left;">Emit sound (Trip)</td>
+                <td style="text-align: center;">Output</td>
+                <td style="text-align: center;">12</td>
+              </tr>
+              <tr>
+                <td style="text-align: left;">Receive sound (Echo)</td>
+                <td style="text-align: center;">Input</td>
+                <td style="text-align: center;">13</td>
+              </tr>
+            </table>
+          </div>
+          <div style="flex-grow:1;display:flex;flex-direction:column;align-items:stretch;justify-content:center;">
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">pinTrip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">pinEcho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">pinEcho</span><span class="p">,</span><span class="w"> </span><span class="n">INPUT</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+          </div>
+        </div>
+        ---
+        ## Distance calculation 
+        Distance of the object in front of the ultrasonic sensor can be calculated using the time between sending and receiving the signal (sound)
+        ---
+        <svg viewBox="0 0 493 269" style="height:400px">
+          <image href="https://wiki.keyestudio.com/images/4/4c/KS0313_3-2-1.png"/>
+          <path d="M 350,200 l -250,0" style="fill:none;stroke:black;stroke-width:3px" />
+          <path d="M 100,200 l 15,-5 c 0,0 -5,5 0,10 l -15,-5 z" style="fill:black;stroke:black;stroke-width:3px" />
+          <path d="M 100,225 l 250,0" style="fill:none;stroke:black;stroke-width:3px" />
+          <path d="M 350,225 l -15,-5 c 0,0 5,5 0,10 l 15,-5 z" style="fill:black;stroke:black;stroke-width:3px" />
+          <path d="M 350,25 l -250,0" style="fill:none;stroke:var(--r-main-color);stroke-width:3px" />
+          <path d="M 100,25 l 15,-5 c 0,0 -5,5 0,10 l -15,-5 z" style="fill:var(--r-main-color);stroke:var(--r-main-color);stroke-width:3px" />
+          <path d="M 350,25 l -15,-5 c 0,0 5,5 0,10 l 15,-5 z" style="fill:var(--r-main-color);stroke:var(--r-main-color);stroke-width:3px" />
+          <text x="225" y="30" dominant-baseline="hanging" text-anchor="middle" style="font-size:20px">d</text>
+        </svg>
+        Time between sending and receiving
+        <br>= time to travel for <span class="arithmatex">\(2d\)</span> = <span class="arithmatex">\(T\)</span> &micro;s
+        ---
+        ### Formula derivation
+        <p></p>
+        \[\begin{aligned}
+        \text{distance }d &amp; = \frac{T \text{ &micro;s}\times \text{speed of sound}}{2}\\
+        &amp; = \frac{T \text{ &micro;s} \times 340 \text{ m/s}}{2}\\
+        &amp; = T \times 10^{-6} \text{ s} \times 170 \times 10^2 \text{ cm/s}\\
+        &amp; = 170 \times 10^{-4} \times T \text{ cm}\\
+        &amp; \approx \frac{T}{58} \text{ cm}
+        \end{aligned}\]
+        ---
+        To implement the emission and recipient of sound and calculating the distance of the object in code,
+        <div style="display:flex;flex-direction:row">
+          <div style="flex-grow:1">
+            <svg viewBox="-200 0 400 600" style="height:500px">
+              <style>.block { fill: var(--r-main-color); } .line { fill: var(--r-main-color); stroke: var(--r-main-color); }</style>
+              <text x="0" y="100" text-anchor="middle" dominant-baseline="middle" class="block">Emit (&gt;10&micro;s)</text>
+              <text x="0" y="300" text-anchor="middle" dominant-baseline="middle" class="block">Receive</text>
+              <text x="0" y="500" text-anchor="middle" dominant-baseline="middle" class="block">Calculate distance</text>
+              <path d="M 0,150 l 0,100 l -10,-20 c 0,0 10,15 20,0 l -10,20" class="line"/>
+              <path d="M 0,350 l 0,100 l -10,-20 c 0,0 10,15 20,0 l -10,20"  class="line"/>
+            </svg>
+          </div>
+          <div style="flex-grow:1;display:flex;flex-direction:column;align-items:stretch;justify-content:center;">
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">pulseIn</span><span class="p">(</span><span class="n">pinEcho</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="o">/</span><span class="mi">58</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+          </div>
+        </div>
+        ---
+        To implement the emission and recipient of sound and calculating the distance of the object in code,
+        <div style="display:flex;flex-direction:row">
+          <div style="flex-grow:1">
+            <svg viewBox="-200 0 400 600" style="height:500px">
+              <style>.block { fill: var(--r-main-color); } .line { fill: var(--r-main-color); stroke: var(--r-main-color); }</style>
+              <rect x="-200" y="50" width="400" height="100" fill="yellow"/>
+              <text x="0" y="100" text-anchor="middle" dominant-baseline="middle" class="block">Emit (&gt;10&micro;s)</text>
+              <text x="0" y="300" text-anchor="middle" dominant-baseline="middle" class="block">Receive</text>
+              <text x="0" y="500" text-anchor="middle" dominant-baseline="middle" class="block">Calculate distance</text>
+              <path d="M 0,150 l 0,100 l -10,-20 c 0,0 10,15 20,0 l -10,20" class="line"/>
+              <path d="M 0,350 l 0,100 l -10,-20 c 0,0 10,15 20,0 l -10,20"  class="line"/>
+            </svg>
+          </div>
+          <div style="flex-grow:1;display:flex;flex-direction:column;align-items:stretch;justify-content:center;">
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="hll"><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
+</span><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="hll"><span class="w">  </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+</span><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="hll"><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+</span><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="hll"><span class="w">  </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span><span class="w"></span>
+</span><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">pulseIn</span><span class="p">(</span><span class="n">pinEcho</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="o">/</span><span class="mi">58</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+          </div>
+        </div>
+        ---
+        To implement the emission and recipient of sound and calculating the distance of the object in code,
+        <div style="display:flex;flex-direction:row">
+          <div style="flex-grow:1">
+            <svg viewBox="-200 0 400 600" style="height:500px">
+              <style>.block { fill: var(--r-main-color); } .line { fill: var(--r-main-color); stroke: var(--r-main-color); }</style>
+              <rect x="-200" y="250" width="400" height="100" fill="yellow"/>
+              <text x="0" y="100" text-anchor="middle" dominant-baseline="middle" class="block">Emit (&gt;10&micro;s)</text>
+              <text x="0" y="300" text-anchor="middle" dominant-baseline="middle" class="block">Receive</text>
+              <text x="0" y="500" text-anchor="middle" dominant-baseline="middle" class="block">Calculate distance</text>
+              <path d="M 0,150 l 0,100 l -10,-20 c 0,0 10,15 20,0 l -10,20" class="line"/>
+              <path d="M 0,350 l 0,100 l -10,-20 c 0,0 10,15 20,0 l -10,20"  class="line"/>
+            </svg>
+          </div>
+          <div style="flex-grow:1;display:flex;flex-direction:column;align-items:stretch;justify-content:center;">
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="hll"><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
+</span><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="hll"><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">pulseIn</span><span class="p">(</span><span class="n">pinEcho</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+</span><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="hll"><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+</span><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="o">/</span><span class="mi">58</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+          </div>
+        </div>
+        ---
+        To implement the emission and recipient of sound and calculating the distance of the object in code,
+        <div style="display:flex;flex-direction:row">
+          <div style="flex-grow:1">
+            <svg viewBox="-200 0 400 600" style="height:500px">
+              <style>.block { fill: var(--r-main-color); } .line { fill: var(--r-main-color); stroke: var(--r-main-color); }</style>
+              <rect x="-200" y="450" width="400" height="100" fill="yellow"/>
+              <text x="0" y="100" text-anchor="middle" dominant-baseline="middle" class="block">Emit (&gt;10&micro;s)</text>
+              <text x="0" y="300" text-anchor="middle" dominant-baseline="middle" class="block">Receive</text>
+              <text x="0" y="500" text-anchor="middle" dominant-baseline="middle" class="block">Calculate distance</text>
+              <path d="M 0,150 l 0,100 l -10,-20 c 0,0 10,15 20,0 l -10,20" class="line"/>
+              <path d="M 0,350 l 0,100 l -10,-20 c 0,0 10,15 20,0 l -10,20"  class="line"/>
+            </svg>
+          </div>
+          <div style="flex-grow:1;display:flex;flex-direction:column;align-items:stretch;justify-content:center;">
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">pulseIn</span><span class="p">(</span><span class="n">pinEcho</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="hll"><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="o">/</span><span class="mi">58</span><span class="p">;</span><span class="w"></span>
+</span><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="hll"><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span><span class="w"></span>
+</span><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+          </div>
+        </div>
+        ---
+        We can use the serial monitor to display the reading of ultrasonic and the distance calculated
+        <div style="display:flex;flex-direction:row">
+          <div style="flex-grow:1">
+            <svg viewBox="-200 0 400 400" style="height:300px">
+              <style>.block { fill: var(--r-main-color); } .line { fill: var(--r-main-color); stroke: var(--r-main-color); }</style>
+              <text x="0" y="100" text-anchor="middle" dominant-baseline="middle" class="block">Enable</text>
+              <text x="0" y="300" text-anchor="middle" dominant-baseline="middle" class="block">Display</text>
+              <path d="M 0,150 l 0,100 l -10,-20 c 0,0 10,15 20,0 l -10,20" class="line"/>
+            </svg>
+          </div>
+          <div style="flex-grow:1;display:flex;flex-direction:column;align-items:stretch;justify-content:center;">
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">...</span><span class="w"></span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kt">void</span><span class="w"> </span><span class="n">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="p">...</span><span class="w"></span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">}</span><span class="w"></span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="kt">void</span><span class="w"> </span><span class="n">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">  </span><span class="p">...</span><span class="w"></span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="o">/</span><span class="mi">58</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;distance=&quot;</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">distance</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;cm&quot;</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+          </div>
+        </div>
+        ---
+        We can use the serial monitor to display the reading of ultrasonic and the distance calculated
+        <div style="display:flex;flex-direction:row">
+          <div style="flex-grow:1">
+            <svg viewBox="-200 0 400 400" style="height:300px">
+              <style>.block { fill: var(--r-main-color); } .line { fill: var(--r-main-color); stroke: var(--r-main-color); }</style>
+              <rect x="-200" y="50" width="400" height="100" fill="yellow"/>
+              <text x="0" y="100" text-anchor="middle" dominant-baseline="middle" class="block">Enable</text>
+              <text x="0" y="300" text-anchor="middle" dominant-baseline="middle" class="block">Display</text>
+              <path d="M 0,150 l 0,100 l -10,-20 c 0,0 10,15 20,0 l -10,20" class="line"/>
+            </svg>
+          </div>
+          <div style="flex-grow:1;display:flex;flex-direction:column;align-items:stretch;justify-content:center;">
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">...</span><span class="w"></span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kt">void</span><span class="w"> </span><span class="n">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="p">...</span><span class="w"></span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="hll"><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span><span class="w"></span>
+</span><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">}</span><span class="w"></span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="kt">void</span><span class="w"> </span><span class="n">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span><span class="p">...</span><span class="w"></span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="o">/</span><span class="mi">58</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;distance=&quot;</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">distance</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;cm&quot;</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+          </div>
+        </div>
+        ---
+        We can use the serial monitor to display the calculated distance
+        <div style="display:flex;flex-direction:row">
+          <div style="flex-grow:1">
+            <svg viewBox="-200 0 400 400" style="height:300px">
+              <style>.block { fill: var(--r-main-color); } .line { fill: var(--r-main-color); stroke: var(--r-main-color); }</style>
+              <rect x="-200" y="250" width="400" height="100" fill="yellow"/>
+              <text x="0" y="100" text-anchor="middle" dominant-baseline="middle" class="block">Enable</text>
+              <text x="0" y="300" text-anchor="middle" dominant-baseline="middle" class="block">Display</text>
+              <path d="M 0,150 l 0,100 l -10,-20 c 0,0 10,15 20,0 l -10,20" class="line"/>
+            </svg>
+          </div>
+          <div style="flex-grow:1;display:flex;flex-direction:column;align-items:stretch;justify-content:center;">
+            <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">...</span><span class="w"></span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kt">void</span><span class="w"> </span><span class="n">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="p">...</span><span class="w"></span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">}</span><span class="w"></span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="kt">void</span><span class="w"> </span><span class="n">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span><span class="p">...</span><span class="w"></span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="o">/</span><span class="mi">58</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="hll"><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;distance=&quot;</span><span class="p">);</span><span class="w"></span>
+</span><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="hll"><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">distance</span><span class="p">);</span><span class="w"></span>
+</span><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="hll"><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;cm&quot;</span><span class="p">);</span><span class="w"></span>
+</span><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+          </div>
+        </div>
+        ---
+        The full code will look like this:
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">pinTrip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">pinEcho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="hll"><span class="kt">float</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+</span><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">pinEcho</span><span class="p">,</span><span class="w"> </span><span class="n">INPUT</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">}</span><span class="w"></span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">  </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">  </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">pulseIn</span><span class="p">(</span><span class="n">pinEcho</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="o">/</span><span class="mi">58</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;distance=&quot;</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">distance</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;cm&quot;</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+        ---
+        Now verify and upload the code to the robot
+        ---
+        After the code is running on the robot, launch serial monitor from the Arduino IDE
+        <div style="display:flex;flex-direction:row;align-items:center">
+          <div style="text-align:center">
+            <img alt="launch serial monitor" src="../img/serialmonitorlaunch.png" style="height:350px" />
+            <br>Tools &gt; Serial Monitor
+          </div>
+          <div style="text-align:center">
+            <img alt="serial monitor" src="../img/serialmonitor.png" style="height:200px" />
+            <br>Serial Monitor (Baud rate 9600)
+          </div>
+        </div>
+      </textarea>
+    </section>
+  </div>
+</div></p>
+<div class="admonition info inline end">
+<p><kbd>F</kbd> for fullscreen &middot;
+<kbd>O</kbd> for overview</p>
+</div>
+</details>
 <h2 id="what-is-ultrasonic-sensor">What is ultrasonic sensor?</h2>
-<h2 id="what-does-ultrasonic-sensor-work">What does ultrasonic sensor work?</h2>
-<h2 id="reading-from-an-ultrasonic-sensor">Reading from an ultrasonic sensor</h2>
+<div style="display:flex;flex-direction:row;align-items:center">
+<figure markdown>
+<img src="https://wiki.keyestudio.com/images/a/aa/KS0313_3-2-2.png" style="height:150px" />
+<figcaption>Ultrasonic sensor on the turtle robot</figcaption>
+</figure>
+<figure markdown>
+<img src="https://wiki.keyestudio.com/images/0/0e/Ks0364_-_connection_7.png" style="height:200px" />
+<figcaption>Ultrasonic sensor connection</figcaption>
+</figure>
+</div>
+
+<h2 id="how-does-ultrasonic-sensor-work">How does ultrasonic sensor work?</h2>
+<figure>
+<p><img alt="ultrasonic principle" src="https://wiki.keyestudio.com/images/4/4c/KS0313_3-2-1.png" style="height:300px" /></p>
+<figcaption>Principle of ultrasonic sensor</figcaption>
+</figure>
+<h2 id="read-from-an-ultrasonic-sensor">Read from an ultrasonic sensor</h2>
+<h3 id="pin-mode-definition">Pin mode definition</h3>
+<div style="display:flex;flex-direction:row">
+  <div style="flex-grow:1">
+    <table>
+      <tr>
+        <th style="text-align: left;">Purpose</th>
+        <th style="text-align: center;">Mode</th>
+        <th style="text-align: center;">Pin on board</th>
+      </tr>
+      <tr>
+        <td style="text-align: left;">Emit sound (Trip)</td>
+        <td style="text-align: center;">Output</td>
+        <td style="text-align: center;">12</td>
+      </tr>
+      <tr>
+        <td style="text-align: left;">Receive sound (Echo)</td>
+        <td style="text-align: center;">Input</td>
+        <td style="text-align: center;">13</td>
+      </tr>
+    </table>
+  </div>
+  <div style="flex-grow:1;display:flex;flex-direction:column;align-items:stretch;justify-content:center;">
+    <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span>
+<span class="normal"><a href="#__codelineno-9-4">4</a></span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span>
+<span class="normal"><a href="#__codelineno-9-6">6</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">pinTrip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">pinEcho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">pinEcho</span><span class="p">,</span><span class="w"> </span><span class="n">INPUT</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+</td></tr></table>
+  </div>
+</div>
+<h3 id="distance-calculation">Distance calculation</h3>
+<p>Distance of the object in front of the ultrasonic sensor can be calculated using the time between sending and receiving the signal (sound)</p>
+<figure>
+<svg viewBox="0 0 493 269" style="height:300px">
+  <image href="https://wiki.keyestudio.com/images/4/4c/KS0313_3-2-1.png"/>
+  <path d="M 350,200 l -250,0" style="fill:none;stroke:black;stroke-width:3px" />
+  <path d="M 100,200 l 15,-5 c 0,0 -5,5 0,10 l -15,-5 z" style="fill:black;stroke:black;stroke-width:3px" />
+  <path d="M 100,225 l 250,0" style="fill:none;stroke:black;stroke-width:3px" />
+  <path d="M 350,225 l -15,-5 c 0,0 5,5 0,10 l 15,-5 z" style="fill:black;stroke:black;stroke-width:3px" />
+  <path d="M 350,25 l -250,0" style="fill:none;stroke:var(--r-main-color);stroke-width:3px" />
+  <path d="M 100,25 l 15,-5 c 0,0 -5,5 0,10 l -15,-5 z" style="fill:var(--r-main-color);stroke:var(--r-main-color);stroke-width:3px" />
+  <path d="M 350,25 l -15,-5 c 0,0 5,5 0,10 l 15,-5 z" style="fill:var(--r-main-color);stroke:var(--r-main-color);stroke-width:3px" />
+  <text x="225" y="30" dominant-baseline="hanging" text-anchor="middle" style="font-size:20px">d</text>
+</svg>
+</figure>
+<p>Time between sending and receiving = time to travel for <span class="arithmatex">\(2d\)</span> = <span class="arithmatex">\(T\)</span> &micro;s</p>
+<h3 id="formula-derivation">Formula derivation</h3>
+<div class="arithmatex">\[\begin{aligned}
+\text{distance }d &amp; = \frac{T \text{ &micro;s}\times \text{speed of sound}}{2}\\\\
+&amp; = \frac{T \text{ &micro;s} \times 340 \text{ m/s}}{2}\\\\
+&amp; = T \times 10^{-6} \text{ s} \times 170 \times 10^2 \text{ cm/s}\\\\
+&amp; = 170 \times 10^{-4} \times T \text{ cm}\\\\
+&amp; \approx \frac{T}{58} \text{ cm}
+\end{aligned}\]</div>
+<h3 id="code-implementation">Code implementation</h3>
+<p>To implement the emission and recipient of sound and calculating the distance of the object in code,</p>
+<figure>
+  <svg viewBox="-200 50 400 300" style="height:300px">
+    <style>.block { fill: var(--r-main-color); } .line { fill: var(--r-main-color); stroke: var(--r-main-color); }</style>
+    <text x="0" y="100" text-anchor="middle" dominant-baseline="middle" class="block">Emit (>10&micro;s)</text>
+    <text x="0" y="200" text-anchor="middle" dominant-baseline="middle" class="block">Receive</text>
+    <text x="0" y="300" text-anchor="middle" dominant-baseline="middle" class="block">Calculate distance</text>
+    <path d="M 0,125 l 0,50 l -10,-20 c 0,0 10,15 20,0 l -10,20" class="line"/>
+    <path d="M 0,225 l 0,50 l -10,-20 c 0,0 10,15 20,0 l -10,20"  class="line"/>
+  </svg>
+</figure>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span><span class="w">        </span><span class="c1">//(1)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">  </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">  </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span><span class="w">            </span><span class="c1">//(2)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span><span class="w">        </span><span class="c1">//(3)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">pulseIn</span><span class="p">(</span><span class="n">pinEcho</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w">                        </span><span class="c1">//(4)</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="o">/</span><span class="mi">58</span><span class="p">;</span><span class="w">             </span><span class="c1">//(5)</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+</td></tr></table>
+<ol>
+<li>Emit sound for 12 &micro;s (Start)</li>
+<li>Emit sound for 12 &micro;s (End)</li>
+<li>Receive sound (Start)</li>
+<li>Receive sound (End)</li>
+<li>Calculate distance</li>
+</ol>
+<h3 id="serial-monitor-to-display-calculated-distance">Serial monitor to display calculated distance</h3>
+<p>We can use the serial monitor to display the calculated distance</p>
+<figure>
+  <svg viewBox="-200 50 400 200" style="height:300px">
+    <style>.block { fill: var(--r-main-color); } .line { fill: var(--r-main-color); stroke: var(--r-main-color); }</style>
+    <text x="0" y="100" text-anchor="middle" dominant-baseline="middle" class="block">Enable</text>
+    <text x="0" y="200" text-anchor="middle" dominant-baseline="middle" class="block">Display</text>
+    <path d="M 0,125 l 0,50 l -10,-20 c 0,0 10,15 20,0 l -10,20" class="line"/>
+  </svg>
+</figure>
+
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span>
+<span class="normal"><a href="#__codelineno-11-11">11</a></span>
+<span class="normal"><a href="#__codelineno-11-12">12</a></span>
+<span class="normal"><a href="#__codelineno-11-13">13</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="p">...</span><span class="w"></span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="kt">void</span><span class="w"> </span><span class="n">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">  </span><span class="p">...</span><span class="w"></span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span><span class="w">         </span><span class="c1">//(1)</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="p">}</span><span class="w"></span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="kt">void</span><span class="w"> </span><span class="n">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">  </span><span class="p">...</span><span class="w"></span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="o">/</span><span class="mi">58</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;distance=&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">//(2)</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">distance</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;cm&quot;</span><span class="p">);</span><span class="w">       </span><span class="c1">//(3)</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+</td></tr></table>
+<ol>
+<li>Enable serial connection at baud rate of 9600</li>
+<li><code>Serial.print("text")</code> prints out the text</li>
+<li><code>Serial.println("text")</code> prints out the text and end the line, further printing will start in a new line</li>
+</ol>
+<h3 id="combining-the-code">Combining the code</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kt">int</span><span class="w"> </span><span class="n">pinTrip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kt">int</span><span class="w"> </span><span class="n">pinEcho</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">13</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="kt">float</span><span class="w"> </span><span class="n">distance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="c1">//(1)</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">setup</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="w"> </span><span class="n">OUTPUT</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">  </span><span class="n">pinMode</span><span class="p">(</span><span class="n">pinEcho</span><span class="p">,</span><span class="w"> </span><span class="n">INPUT</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="p">}</span><span class="w"></span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="kt">void</span><span class="w"> </span><span class="nf">loop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">  </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">  </span><span class="n">delayMicroseconds</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">  </span><span class="n">digitalWrite</span><span class="p">(</span><span class="n">pinTrip</span><span class="p">,</span><span class="n">LOW</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">pulseIn</span><span class="p">(</span><span class="n">pinEcho</span><span class="p">,</span><span class="n">HIGH</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">  </span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="o">/</span><span class="mi">58</span><span class="p">;</span><span class="w"></span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;distance=&quot;</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">print</span><span class="p">(</span><span class="n">distance</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">  </span><span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;cm&quot;</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="w">  </span><span class="n">delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<ol>
+<li>Take note of this line. We need to define the variable to later save our reading from the ultrasonic sensor.</li>
+</ol>
+<h3 id="verify-and-upload-the-code-to-the-robot">Verify and upload the code to the robot</h3>
+<h3 id="launch-serial-monitor">Launch serial monitor</h3>
+<p>After the code is running on the robot, launch serial monitor from the Arduino IDE</p>
+<figure>
+<p><img alt="launch serial monitor" src="../img/serialmonitorlaunch.png" style="height:350px" /></p>
+<figcaption>Tools &gt; Serial Monitor</figcaption>
+</figure>
+<figure>
+<p><img alt="serial monitor" src="../img/serialmonitor.png" style="height:200px" /></p>
+<figcaption>Serial Monitor (Baud rate 9600)</figcaption>
+</figure>
 
               
             </article>
@@ -457,9 +1041,17 @@
     
       <script src="../assets/javascripts/bundle.8aa65030.min.js"></script>
       
+        <script src="../js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
         <script src="../js/reveal.js"></script>
       
         <script src="../js/plugin/markdown/markdown.js"></script>
+      
+        <script src="../js/plugin/math/math.js"></script>
       
         <script src="../js/init-reveal.js"></script>
       
