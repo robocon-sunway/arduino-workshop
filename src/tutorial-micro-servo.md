@@ -199,14 +199,14 @@
             void setup() {
               pinMode(servopin, OUTPUT);
               Serial.begin(9600);
-              Serial.println("servo program initiated")
+              Serial.println("servo program initiated");
             }
             void servopulse(int s_pin, int s_angle) {
-              Serial.print("angle = ")
-              Serial.print(s_angle)
+              Serial.print("angle = ");
+              Serial.print(s_angle);
               int pulsewidth = s_angle * 11 + 500;
-              Serial.print(" pulsewidth = ")
-              Serial.println(pulsewidth)
+              Serial.print(" pulsewidth = ");
+              Serial.println(pulsewidth);
               digitalWrite(s_pin, HIGH);
               delayMicroseconds(pulsewidth);
               digitalWrite(s_pin, LOW);
@@ -348,14 +348,14 @@ int servopin = 3;
 void setup() {
   pinMode(servopin, OUTPUT);
   Serial.begin(9600);
-  Serial.println("servo program initiated")
+  Serial.println("servo program initiated");
 }
 void servopulse(int s_pin, int s_angle) {
-  Serial.print("angle = ")
-  Serial.print(s_angle)
+  Serial.print("angle = ");
+  Serial.print(s_angle);
   int pulsewidth = s_angle * 11 + 500;
-  Serial.print(" pulsewidth = ")
-  Serial.println(pulsewidth)
+  Serial.print(" pulsewidth = ");
+  Serial.println(pulsewidth);
   digitalWrite(s_pin, HIGH);
   delayMicroseconds(pulsewidth);
   digitalWrite(s_pin, LOW);
