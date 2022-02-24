@@ -15,13 +15,6 @@
         ---
         # Welcome to Robotic Workshop
         by Sunway University, School of Engineering and Technology
-        ---
-        ## Health & Safety
-        Fire extinguishers &middot; First aid kits &middot; Exits &middot; Staircase &middot; Water &middot; Shoes
-        ---
-        ## Introduction
-        We will be using the little turtle robot from keyestudio with Arduino programming<br>
-        ![keyestudio robot](https://wiki.keyestudio.com/images/2/25/%E5%9B%BE%E7%89%871_-_ks0364.png){ style="height:300px" }
       </textarea>
     </section>
   </div>
