@@ -1,4 +1,4 @@
-# Challenge 2 Line following
+# Challenge: Line following
 
 !!! hint
 	Use infrared sensors

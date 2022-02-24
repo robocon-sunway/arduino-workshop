@@ -1,4 +1,4 @@
-# Challenge 2 Obstacle avoidance
+# Challenge: Obstacle avoidance
 
 !!! hint
 	Combine all you have learnt up to now

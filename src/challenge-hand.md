@@ -1,4 +1,4 @@
-# Challenge 1 Hand following/stopping
+# Challenge: Hand following/stopping
 
 !!! hint
 	Use ultrasonic sensor
