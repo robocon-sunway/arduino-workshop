@@ -4,6 +4,7 @@ theme:
   icon: 
     logo: material/robot-excited
   favicon: img/favicon.svg
+  custom_dir: overrides
   features:
     - toc.follow
     - toc.integrate
