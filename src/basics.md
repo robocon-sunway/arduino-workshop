@@ -151,7 +151,7 @@
 
         ### Getting prepared to program on an Arduino device
 
-        * Get familiriased with the Arduino IDE (Integrated Development Environment)
+        * Get familiarised with the Arduino IDE (Integrated Development Environment)
         * Understand the features of the Arduino board
         * Be ready to make mistakes and start all over again
         * Stay curious and explore!
