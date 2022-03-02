@@ -4,19 +4,12 @@
   <div class="slides">
     <section data-markdown>
       <textarea data-template>
-        ## Schedule
-        |  Time   | Event |
-        |:-------:|:------|
-        | 2:00 pm | Welcoming and briefing |
-        | 2:10 pm | Basic of general programming, Arduino programming, and robot control mechanism |
-        | 2:40 pm | Arduino coding tutorials with little turtle robot from keyestudio |
-        | 3:20 pm | Quick challenge |
-        | 4:00 pm | See you around |
-        ---
         # Welcome to Robotic Workshop
         by Sunway University, School of Engineering and Technology
         ---
-        # Contents
+        # Basics of programming
+        ---
+        ## Contents
         1. What is Programming?
         2. Introduction to Computational Thinking
         3. Why should I learn Programming?
@@ -34,23 +27,22 @@
         ---
         > Programming allows you to "instruct" a "computer" to perform a task
        
-        ![Instruct](../img/basics-instructions.png){ align=right }
-   
         ### Instruct
         Computers are good followers. It will do everything you provide as instructions...
 
         ...even the wrong ones...
+
+        <img src="../img/basics-instructions.png" style="height:200px;position:absolute;right:-20px;bottom:-150px"/>
         ---
         > Programming allows you to "instruct" a "computer" to perform a task
-        
-        
-        ![Computer](../img/basics-computer.png){ align=right }
         
         ### Computer
 
         A computer is not just your PC or notebook. 
 
         Even your smartphone, your smart TV and your fitbit are some kind of computers.
+
+        <img src="../img/basics-computer.png" style="height:200px;position:absolute;right:-20px;bottom:-200px"/>
         ---
 
         ### Actually....
@@ -92,9 +84,7 @@
         ---
         ## Computational Thinking
         
-        
-        ![Computational Thinking](https://bam.files.bbci.co.uk/bam/live/content/zg6bgk7/large)
-
+        <img src="https://bam.files.bbci.co.uk/bam/live/content/zg6bgk7/large" alt="Computational Thinking" style="height:400px"/>
 
         <small>Image taken from https://www.bbc.co.uk/bitesize/guides/zp92mp3/revision/1</small>
         ---
@@ -136,7 +126,7 @@
         ---
         ## Introducing - Arduino
 
-        ![Arduino](../img/basics-arduino.jpeg)
+        <img alt="Arduino" src="../img/basics-arduino.jpeg" style="height:500px"/>
         ---
         ## Arduino
 
