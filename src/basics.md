@@ -80,7 +80,7 @@
         ---
         ### But it sounds difficult....
 
-        There is a technique one can use to help solving completx problem and instruct a computer accordingly...
+        There is a technique one can use to help solving complex problem and instruct a computer accordingly...
         ---
         ## Computational Thinking
         
@@ -151,7 +151,7 @@
 
         ### Getting prepared to program on an Arduino device
 
-        * Get familiarised with the Arduino IDE (Integrated Development Environment)
+        * Get familiar with the Arduino IDE (Integrated Development Environment)
         * Understand the features of the Arduino board
         * Be ready to make mistakes and start all over again
         * Stay curious and explore!
