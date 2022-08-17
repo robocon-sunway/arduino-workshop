@@ -6,15 +6,21 @@
         <section data-markdown>
           <textarea data-template>
             ## Schedule
-            |  Time   | Event |
-            |:-------:|:------|
-            | 9:00 am | Welcoming and briefing |
-            | 9:10 am | Basics of general programming, Arduino programming, and robot control mechanism |
-            | 9:40 am | Arduino coding tutorials with little turtle robot from keyestudio |
-            | 10:20 am | Quick challenge |
-            | 11:00 am | See you around |
+            |  Time    | Event |
+            |:--------:|:------|
+            | 9:00 am  | Welcoming and briefing |
+            | 9:10 am  | Basics of general programming, Arduino programming, and robot control mechanism |
+            |  -       | **Arduino coding tutorials with little turtle robot from keyestudio** |
+            | 9:40 am  | Tutorial 1: LED blinking |
+            | 10:00 am | Tutorial 2: Motor |
+            | 10:30 am | Tutorial 3: Ultrasonic sensor |
+            | 11:00 am | Tutorial 4: Infrared sensors |
+            | 12:00 pm | Lunch break |
+            | 2:30 pm  | Challenges briefing |
+            | 2:45 pm  | Try to solve the challenges! |
+            | 5:00 pm  | See you around |
             ---
-            # Welcome to Robotic Workshop
+            # Welcome to Arduino Workshop
             by Sunway University, School of Engineering and Technology
             ---
             ## Health & Safety
@@ -33,10 +39,16 @@
 
 ## Schedule
 
-|  Time   | Event |
-|:-------:|:------|
-| 2:00 pm | Welcoming and briefing |
-| 2:10 pm | Basics of general programming, Arduino programming, and robot control mechanism |
-| 2:40 pm | Arduino coding tutorials with little turtle robot from keyestudio |
-| 3:20 pm | Quick challenge |
-| 4:00 pm | See you around |
+|  Time    | Event |
+|:--------:|:------|
+| 9:00 am  | Welcoming and briefing |
+| 9:10 am  | Basics of general programming, Arduino programming, and robot control mechanism |
+|          | **Arduino coding tutorials with little turtle robot from keyestudio** |
+| 9:40 am  | Tutorial 1: LED blinking |
+| 10:00 am | Tutorial 2: Motor |
+| 10:30 am | Tutorial 3: Ultrasonic sensor |
+| 11:00 am | Tutorial 4: Infrared sensors |
+| 12:00 pm | Lunch break |
+| 2:30 pm  | Challenges briefing |
+| 2:45 pm  | Try to solve the challenges! |
+| 5:00 pm  | See you around |
