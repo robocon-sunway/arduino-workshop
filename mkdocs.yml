@@ -1,4 +1,4 @@
-site_name: Pre-U Robotic Workshop
+site_name: Arduino Workshop
 theme:
   name: material
   icon: 
@@ -53,8 +53,8 @@ nav:
   - Tutorial 2 Motor: "tutorial-motor.md"
   - Tutorial 3 Ultrasonic sensor: "tutorial-ultrasonic-sensor.md"
   - Tutorial 4 Micro servo: "tutorial-micro-servo.md"
-  # - Tutorial 5 Infrared sensors: "tutorial-infrared-sensor.md"
+  - Tutorial 5 Infrared sensors: "tutorial-infrared-sensor.md"
   # - Tutorial 6 LED matrix: "tutorial-led-matrix.md"
   - Challenge 1: "challenge-hand.md"
   - Challenge 2: "challenge-obstacle-avoidance.md"
-  # - Challenge 3: "challenge-line-following.md"
+  - Challenge 3: "challenge-line-following.md"
