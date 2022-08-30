@@ -55,6 +55,7 @@ nav:
   - Tutorial 4 Micro servo: "tutorial-micro-servo.md"
   - Tutorial 5 Infrared sensors: "tutorial-infrared-sensor.md"
   # - Tutorial 6 LED matrix: "tutorial-led-matrix.md"
+  - Tutorial 6 Serial communication: "tutorial-serial-communication.md"
   - Challenge 1: "challenge-hand.md"
   - Challenge 2: "challenge-obstacle-avoidance.md"
   - Challenge 3: "challenge-line-following.md"
